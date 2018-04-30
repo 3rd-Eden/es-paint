@@ -1,0 +1,37 @@
+{
+  "name": "es-paint",
+  "version": "1.0.0",
+  "description": "Terminal (ANSI) colors using ES6 template literals",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3rd-Eden/es-paint.git"
+  },
+  "keywords": [
+    "paint",
+    "ms-paint",
+    "es-paint",
+    "terminal",
+    "colors",
+    "ansi",
+    "color",
+    "template",
+    "literals"
+  ],
+  "author": "Arnout Kazemier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/3rd-Eden/es-paint/issues"
+  },
+  "homepage": "https://github.com/3rd-Eden/es-paint#readme",
+  "dependencies": {
+    "kuler": "^1.0.0"
+  },
+  "devDependencies": {
+    "assume": "^2.0.1",
+    "mocha": "^5.1.1"
+  }
+}
