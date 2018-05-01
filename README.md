@@ -23,23 +23,22 @@ const paint = require('es-paint');
 const version = '1.3.31';
 const name = 'example';
 
-console.log(paint`USAGE: ${name}=>#ff69B4 [options]`);
+console.log(paint`USAGE: ${name}|>#ff69B4 [options]`);
 console.log('');
-console.log(paint`current version: ${version}=>red`);
+console.log(paint`current version: ${version}|>red`);
 ```
 
-Adding `=>` after the template variable `${variable}` will re-color the
+Adding `|>` or `=>` after the template variable `${variable}` will re-color the
 variables result in the given color name.
 
 ```js
-paint`${variable}=>red${variable}=>yellow`
+paint`${variable}|>red${variable}=>yellow`
 ```
-
 In addition to color names, you can also use HEX colors, these are
 automatically transformed to the closest matching ANSI color.
 
 ```js
-console.log(paint`hello ${world}=>#FF69B4`);
+console.log(paint`hello ${world}|>#FF69B4`);
 ```
 
 The example above will render `hello ` in normal colors and `world` in

@@ -8,7 +8,7 @@ const kuler = require('kuler');
  * @type {RegExp}
  * @private
  */
-const extract = /^=>([#?^\w]+)/;
+const extract = /^[=|\|]>([#?^\w]+)/;
 
 /**
  * Introduce ANSI colors by processing template literals.
