@@ -18,7 +18,7 @@ The `es-paint` returns a function that should be used as template literal
 processor:
 
 ```js
-const paint = require('es-paint');
+const { paint } = require('es-paint');
 
 const version = '1.3.31';
 const name = 'example';
@@ -34,6 +34,7 @@ variables result in the given color name.
 ```js
 paint`${variable}|>red${variable}=>yellow`
 ```
+
 In addition to color names, you can also use HEX colors, these are
 automatically transformed to the closest matching ANSI color.
 
@@ -43,6 +44,14 @@ console.log(paint`hello ${world}|>#FF69B4`);
 
 The example above will render `hello ` in normal colors and `world` in
 **hot pink**.
+
+So, what about that use-case when people want to disable the use of colors?
+
+```js
+const { stripper } = require('es-paint');
+```
+
+Same syntax, just doesn't apply colors.
 
 ## License
 

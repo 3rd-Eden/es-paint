@@ -11,41 +11,57 @@ const kuler = require('kuler');
 const extract = /^[=|\|]>([#?^\w]+)/;
 
 /**
- * Introduce ANSI colors by processing template literals.
+ * Generates our painters.
  *
- * @param {Array} strings Template strings.
- * @param {Array} values Template values.
- * @returns {String} The colored template.
+ * @param {Function} modifier Modifier to trigger when encountering |> =>() tags
+ * @return {Function} Our painter.
  * @public
  */
-function paint(strings, ...values) {
-  let result = '';
-  let value = '';
+function painter(modifier) {
+  /**
+   * Introduce ANSI colors by processing template literals.
+   *
+   * @param {Array} strings Template strings.
+   * @param {Array} values Template values.
+   * @returns {String} The colored template.
+   * @public
+   */
+  return function paint(strings, ...values) {
+    let result = '';
+    let value = '';
 
-  for (let i = 0, l = strings.length; i < l; i++) {
-    let str = strings[i];
-    let match = extract.exec(str);
+    for (let i = 0, l = strings.length; i < l; i++) {
+      let str = strings[i];
+      let match = extract.exec(str);
 
-    if (match && value) {
-      result += kuler(value, match[1]);
+      if (match && value) {
+        result += modifier(value, match[1]);
 
-      //
-      // Remove the paint instruction from the string so it doesn't end up in
-      // the resulting output.
-      //
-      str = str.slice(match[0].length);
-    } else {
-      result += value;
+        //
+        // Remove the paint instruction from the string so it doesn't end up in
+        // the resulting output.
+        //
+        str = str.slice(match[0].length);
+      } else {
+        result += value;
+      }
+
+      result += str;
+      value = values.shift();
     }
 
-    result += str;
-    value = values.shift();
+    return result;
   }
-
-  return result;
 }
+
+const stripper = painter((content) => content);
+const paint = painter(kuler);
 
 //
 // Expose the paint method.
 //
-module.exports = paint;
+module.exports = {
+  stripper: stripper,
+  painter: painter,
+  paint: paint
+};
